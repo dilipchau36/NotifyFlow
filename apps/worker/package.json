@@ -1,0 +1,21 @@
+{
+  "name": "@notifyflow/worker",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "tsx watch src/worker.ts",
+    "build": "tsc",
+    "start": "node dist/worker.js"
+  },
+  "dependencies": {
+    "@notifyflow/shared-types": "workspace:*",
+    "@aws-sdk/client-sqs": "^3.0.0",
+    "knex": "^3.0.0",
+    "pg": "^8.11.0",
+    "@sendgrid/mail": "^8.0.0",
+    "twilio": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "tsx": "^4.0.0"
+  }
+}
