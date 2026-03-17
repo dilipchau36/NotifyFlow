@@ -11,6 +11,12 @@ node_modules
 .env.development.local
 .env.test.local
 .env.production.local
+.env*.local
+
+# never commit these
+apps/api/.env.local
+apps/worker/.env.local
+apps/dashboard/.env.local
 
 # Testing
 coverage

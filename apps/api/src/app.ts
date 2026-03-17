@@ -1,14 +1,17 @@
+import "./loadEnv"
+
+import {apiEnv} from "@notifyflow/env"
 import express from 'express'
 
+console.log(apiEnv.PORT)
+console.log(apiEnv.SENDGRID_API_KEY)
+
+
 const app = express()
+const PORT = apiEnv.PORT || 3001
+
 app.use(express.json())
 
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok' })
+app.listen(PORT, () => {
+  console.log(`API running on http://localhost:${PORT}`)
 })
-
-app.listen(3001, () => {
-  console.log('API running on http://localhost:3001')
-})
-
-export default app
