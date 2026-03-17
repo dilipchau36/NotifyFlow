@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { commonEnv } from '@notifyflow/env'
+import { dashboardEnv } from '@notifyflow/env/src/dashboard.env'
 import "./globals.css";
 
 const geistSans = Geist({
