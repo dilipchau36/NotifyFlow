@@ -8,15 +8,16 @@
   },
   "dependencies": {
     "@notifyflow/env": "workspace:*",
+    "@aws-sdk/client-sqs": "^3.1009.0",
     "@notifyflow/shared-types": "workspace:*",
-    "@aws-sdk/client-sqs": "^3.0.0",
+    "@sendgrid/mail": "^8.1.6",
+    "axios": "^1.13.6",
     "knex": "^3.0.0",
     "pg": "^8.11.0",
-    "@sendgrid/mail": "^8.0.0",
-    "twilio": "^4.0.0"
+    "twilio": "^4.23.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "tsx": "^4.0.0"
+    "tsx": "^4.0.0",
+    "typescript": "^5.9.3"
   }
 }
