@@ -66,17 +66,17 @@ Client / Tenant App
 
 ## Tech Stack
 
-| Layer        | Technology                          |
-|--------------|-------------------------------------|
-| API          | Node.js, TypeScript, Express        |
-| Queue        | AWS SQS (FIFO)                      |
-| Database     | PostgreSQL (via Knex.js)            |
-| Cache        | Redis (API key lookup, rate limit)  |
-| Email        | SendGrid                            |
-| SMS          | Twilio                              |
-| Dashboard    | Next.js 16, Tailwind CSS, Socket.IO |
-| Monorepo     | Turborepo + pnpm workspaces         |
-| Infra        | Docker, AWS                         |
+| Layer     | Technology                          |
+| --------- | ----------------------------------- |
+| API       | Node.js, TypeScript, Express        |
+| Queue     | AWS SQS (FIFO)                      |
+| Database  | PostgreSQL (via Knex.js)            |
+| Cache     | Redis (API key lookup, rate limit)  |
+| Email     | SendGrid                            |
+| SMS       | Twilio                              |
+| Dashboard | Next.js 16, Tailwind CSS, Socket.IO |
+| Monorepo  | Turborepo + pnpm workspaces         |
+| Infra     | Docker, AWS                         |
 
 ---
 
@@ -106,6 +106,17 @@ notifyflow/
 │           └── settings/     # API key management
 └── packages/
     └── shared-types/         # TypeScript types shared across apps
+```
+
+```
+API (producer)          Kafka Topic           Worker (consumer)
+     │                 ┌──────────────┐            │
+     │  produce msg    │ notifications│  consume   │
+     └────────────────►│  partition 0 ├───────────►│
+                       │  partition 1 │            │
+                       └──────────────┘
+                       messages stay 7 days
+                       regardless of consumption
 ```
 
 ---
@@ -173,6 +184,7 @@ pnpm dev
 ```
 
 This starts:
+
 - API on `http://localhost:3001`
 - Dashboard on `http://localhost:3000`
 - Worker polling SQS in the background
@@ -184,19 +196,19 @@ This starts:
 
 ### Auth
 
-| Method | Endpoint             | Description           |
-|--------|----------------------|-----------------------|
-| POST   | `/auth/register`     | Create tenant account |
-| POST   | `/auth/login`        | Get JWT token         |
-| POST   | `/auth/rotate-key`   | Rotate API key        |
+| Method | Endpoint           | Description           |
+| ------ | ------------------ | --------------------- |
+| POST   | `/auth/register`   | Create tenant account |
+| POST   | `/auth/login`      | Get JWT token         |
+| POST   | `/auth/rotate-key` | Rotate API key        |
 
 ### Notifications
 
-| Method | Endpoint            | Auth    | Description              |
-|--------|---------------------|---------|--------------------------|
-| POST   | `/v1/notify`        | API key | Send a notification      |
-| GET    | `/v1/notify/logs`   | API key | List delivery logs       |
-| GET    | `/v1/notify/:id`    | API key | Get delivery detail      |
+| Method | Endpoint          | Auth    | Description         |
+| ------ | ----------------- | ------- | ------------------- |
+| POST   | `/v1/notify`      | API key | Send a notification |
+| GET    | `/v1/notify/logs` | API key | List delivery logs  |
+| GET    | `/v1/notify/:id`  | API key | Get delivery detail |
 
 ### Channels
 
