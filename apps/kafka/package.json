@@ -1,0 +1,17 @@
+{
+  "name": "@notifyflow/kafka",
+  "version": "0.1.0",
+  "main": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint . --ext .ts",
+    "test": "jest"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
